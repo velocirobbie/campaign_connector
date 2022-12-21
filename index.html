@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bungee">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+<link rel="stylesheet" href="app.css">
+
+<body>
+
+<!-- Navigation -->
+<nav class="w3-bar w3-white">
+    <a href="#home" class="w3-button w3-bar-item">Home</a>
+    <a href="#methodology" class="w3-button w3-bar-item">Methodology</a>
+    <a href="#about" class="w3-button w3-bar-item">About</a>
+</nav>
+
+<!-- Content -->
+<section style="max-width:600px;text-align:center;margin:auto">
+  <header class="App-header">
+    <section style="max-width:200px;text-align:center;margin:auto">
+      <h1>Campaign <br /> Connector</h1>
+    </section>
+    <h4>Connect with constituencies like yours to see what campaigns are working around the country...</h4>
+  </header>
+
+  <div id="constitDropdown" class="dropdown-content" style="text-align:center;margin:auto">
+    <input type="text" placeholder="Search for a constituency.." id="constitInput" onkeyup="filterconstits()" onclick="showConstitDropdown">
+  </div>
+
+
+</section>
+
+<button onclick="function1()">Print some stuff</button>
+
+<button onclick="print_window('hello world')">alert window</button>
+<button onclick="window()">window js</button>
+
+<p id='temp-para'></p>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-white">
+  <a href="https://www.facebook.com/campaignlablondon/"><i class="fa fa-facebook-official"></i></a>
+  <a href="https://mobile.twitter.com/campaignlab_"><i class="fa fa-twitter"></i></a>
+  <a href="https://github.com/CampaignLab"><i class="fa fa-github"></i></a>
+  <p class="w3-medium">
+    Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
+  </p>
+</footer>
+
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
