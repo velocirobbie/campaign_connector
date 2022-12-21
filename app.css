@@ -53,6 +53,9 @@ h1 {
   overflow: auto;
   border: 1px solid #ddd;
   z-index: 1;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
 }
 
 .dropdown-content a {
