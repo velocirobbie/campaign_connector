@@ -3,6 +3,7 @@ let analysis_json = '{"E14000754": {"name": "Houghton and Sunderland South"}, "E
 const analysis = JSON.parse(analysis_json);
 const constit_keys = Object.keys(analysis)
 const constit_names = []
+const constit_slugs = []
 
 const slugify = str =>
   str
@@ -20,8 +21,19 @@ console.log(constit_names)
 
 function load() {
   for (i = 0; i < constit_keys.length; i++) {
-    constit_names.push(analysis[constit_keys[i]].name)
+    name = analysis[constit_keys[i]].name;
+    constit_names.push(name);
+    constit_slugs.push(slugify(name));
   }
+}
+
+function constit_map(key, match_list, target_list) {
+  for (i =0; i < constit_keys.length; i++) {
+    if (key == match_list[i]) {
+      return target_list[i];
+    }
+  }
+  return 'not found';
 }
 
 function appendConstit(div, name) {
@@ -29,7 +41,7 @@ function appendConstit(div, name) {
   link.value = name;
   link.innerHTML = name;
   link.id = slugify(name);
-  link.href = '#'+name;
+  link.href = '#'+slugify(name);
   link.style.display = '';
 
   div.appendChild(link);
@@ -43,20 +55,19 @@ function showConstitDropdown() {
   }
 }
 
-/*
 var input = document.getElementById("constitInput");
 input.addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
     event.preventDefault();
-    document.getElementById("constitDropdown").classList.toggle("show");
+    let div = document.getElementById("constitDropdown");
+    let links = div.getElementsByTagName("a");
+    links[0].click();
   }
 });
-*/
 
 function clearDropdown() {
   let div = document.getElementById("constitDropdown");
   let links = div.getElementsByTagName("a");
-  console.log(links)
 
   while (links[0]) {
       links[0].parentNode.removeChild(links[0]);
@@ -82,9 +93,16 @@ function filterconstits() {
   }
 }
 
-function function1() {
-  document.getElementById("temp-para").innerHTML = "Paragraph changed.";
-}
+function hashChange() {
+  console.log('here');
+  document.getElementById("temp-para").innerHTML = window.location.hash;
+  clearDropdown();
+  document.getElementById("constitInput").value = constit_map(
+    window.location.hash.slice(1), constit_slugs, constit_names
+  );
+};
+
+
 
 function print_window(message) {
   window.alert(message)
