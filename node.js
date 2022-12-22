@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 
 // Navigation
 app.get('', (req, res) => {
-    res.render('index', { text: 'Hey' })
+    res.render('index')
 })
 
 //app.get('/about', (req, res) => {
