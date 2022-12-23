@@ -1,6 +1,38 @@
 
-let analysis_json = '{"E14000754": {"name": "Houghton and Sunderland South"}, "E14000831": {"name": "Newcastle Upon Tyne Central"}}'
-const analysis = JSON.parse(analysis_json);
+//let analysis_json = '{"E14000754": {"name": "Houghton and Sunderland South"}, "E14000831": {"name": "Newcastle Upon Tyne Central"}}'
+//const analysis = JSON.parse(analysis_json);
+
+/*
+console.log('here1');
+var analysis = fetch('http://localhost:5000/data')
+  .then((response) => response.json())
+  .then((responseJSON) => {
+       // do stuff with responseJSON here...
+       console.log(responseJSON);
+  });
+
+async function getData(url){
+    const response = await fetch(url);
+    var data = await response.json();
+}
+*/
+
+function readJsonFile(file, callback) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+          var jsonData = JSON.parse(rawFile.responseText);
+          callback(jsonData)
+        }
+    }
+    rawFile.send(null);
+}
+
+readJsonFile('data', console.log)
+console.log('here2');
+
 const constit_keys = Object.keys(analysis)
 const constit_names = []
 const constit_slugs = []
@@ -17,6 +49,7 @@ load()
 console.log(analysis)
 console.log(constit_keys)
 console.log(constit_names)
+
 
 
 function load() {

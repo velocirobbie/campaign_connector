@@ -1,27 +1,36 @@
 // Imports
 const express = require('express')
 const http = require('http')
-const app = express()
+const fs = require('fs')
+const server = express()
 const port = 5000
 
 // Listen on Port 5000
-app.listen(port, () => console.info(`App listening on port ${port}`))
+server.listen(port, () => console.info(`App listening on port ${port}`))
 
 // Static Files
-app.use(express.static('public'));
+server.use(express.static('public'));
+const analysis = require('./public/anaylsis.json');
 
 // Set View's
-app.set('views', './views');
-app.set('view engine', 'ejs');
+server.set('views', './views');
+server.set('view engine', 'ejs');
 
 // Navigation
-app.get('', (req, res) => {
+server.get('', (req, res) => {
     res.render('index')
 })
 
-//app.get('/about', (req, res) => {
+server.get('/data', (req, res) => {
+  res.json(analysis)
+})
+
+//server.get('/about', (req, res) => {
 //   res.sendFile(__dirname + '/views/about.html')
 //})
+
+// Data
+
 
 
 /*
