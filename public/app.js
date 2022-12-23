@@ -81,8 +81,15 @@ function appendConstit(div, name) {
   div.appendChild(link);
 }
 
+function appendDummyConstit(div) {
+  var link = document.createElement("a");
+  link.innerHTML = '...';
+  link.style.display = '';
+  div.appendChild(link);
+}
+
+
 function showConstitDropdown() {
-  console.log('hello')
   div = document.getElementById("constitDropdown");
   for (i = 0; i < constit_names.length; i++) {
     appendConstit(div, constit_names[i], i)
@@ -110,6 +117,8 @@ function clearDropdown() {
 
 function filterconstits() {
   let input, filter, link, i;
+  let max_to_show = 5;
+  let count = 0;
 
   clearDropdown()
   input = document.getElementById("constitInput");
@@ -122,18 +131,85 @@ function filterconstits() {
   for (i = 0; i < constit_names.length; i++) {
     name = constit_names[i]
     if (name.toUpperCase().indexOf(filter) > -1) {
+      // if more to show than allowed
+      if (count >= max_to_show) {
+        appendDummyConstit(div)
+        break;
+      }
       appendConstit(div, name)
+      count += 1
     }
   }
 }
 
+
+function displayResultConstit(constit) {
+  let div = document.createElement('div');
+  div.setAttribute( 'class', 'result-box' )
+
+  let para1 = document.createElement('p');
+  para1.setAttribute( 'class', 'result-header' )
+  let link = document.createElement('a');
+  link.innerHTML = constit.name
+  link.href = '#' + slugify(constit.name);
+  para1.appendChild(link)
+
+  let para2 = document.createElement('p');
+  para2.setAttribute( 'class', 'result-sub' )
+  swing = (constit.swing*100).toFixed(1) + '%'
+  para2.innerHTML = " swing:" + swing + "   similarity:" + constit.similarity + '%'
+
+  div.appendChild(para1)
+  div.appendChild(para2)
+
+  return div
+}
+
+
 function hashChange() {
   console.log('here');
-  document.getElementById("temp-para").innerHTML = window.location.hash;
+  let slug = window.location.hash.slice(1);
+  let name = constit_map(slug, constit_slugs, constit_names);
+  let key = constit_map(slug, constit_slugs, constit_keys);
+  let results = document.getElementById("results");
+
+  // clear results div
+  while (results.children[0]) {
+      results.removeChild(results.children[0]);
+  }
+
+  // tidy dropdown
   clearDropdown();
   document.getElementById("constitInput").value = constit_map(
     window.location.hash.slice(1), constit_slugs, constit_names
   );
+
+  // header
+  let para = document.createElement('p');
+
+  swing = (analysis[key].swing*100).toFixed(1) + '%'
+  let text = (
+    "In the 2019 election, " + name + " had a " + swing + " labour swing, " +
+    "compared to a national average of -7.9%.<br>"
+  )
+  if (analysis[key].congratulation) {
+    text += "This was comparatively a very good local campaign! "
+  }
+  text += (
+    "Check out these other constituencies which had better than average labour swings " +
+    "and are similar demographics to " + name + "."
+  )
+  para.innerHTML = text
+  results.appendChild(para);
+
+  // results
+  // results.appendChild(displayResultConstit(analysis[key]));
+  for (i = 0; i < analysis[key].results.length; i++) {
+    constit = analysis[key].results[i];
+    results.appendChild(displayResultConstit(constit));
+    console.log(constit);
+  }
+
 };
 
 

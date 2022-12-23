@@ -1,3 +1,34 @@
+.result-box {
+  /*border-color: #dc241f!important;*/
+  border-color: #dddddd!important;
+  padding: 8px 16px;
+  border: 1px solid;
+  margin-top: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.result-box:hover {
+  box-shadow: 0 0 10px #dc241f!important;
+}
+
+
+p.result-header {
+  font-size: 18px!important;
+  text-align: left;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+p.result-sub {
+  font-size: 12px;
+  text-align: left;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .App {
   text-align: center;
   height: 100%;
