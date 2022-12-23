@@ -10,7 +10,6 @@ server.listen(port, () => console.info(`App listening on port ${port}`))
 
 // Static Files
 server.use(express.static('public'));
-const analysis = require('./public/anaylsis.json');
 
 // Set View's
 server.set('views', './views');
@@ -19,10 +18,6 @@ server.set('view engine', 'ejs');
 // Navigation
 server.get('', (req, res) => {
     res.render('index')
-})
-
-server.get('/data', (req, res) => {
-  res.json(analysis)
 })
 
 //server.get('/about', (req, res) => {

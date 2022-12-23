@@ -16,7 +16,7 @@ async function getData(url){
     var data = await response.json();
 }
 */
-
+/*
 function readJsonFile(file, callback) {
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
@@ -32,6 +32,7 @@ function readJsonFile(file, callback) {
 
 readJsonFile('data', console.log)
 console.log('here2');
+*/
 
 const constit_keys = Object.keys(analysis)
 const constit_names = []
