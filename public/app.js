@@ -203,7 +203,7 @@ function hashChange() {
   results.appendChild(para);
 
   // results
-  // results.appendChild(displayResultConstit(analysis[key]));
+  results.appendChild(displayResultConstit(analysis[key]));
   for (i = 0; i < analysis[key].results.length; i++) {
     constit = analysis[key].results[i];
     results.appendChild(displayResultConstit(constit));

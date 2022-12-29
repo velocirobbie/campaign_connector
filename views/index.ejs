@@ -9,41 +9,13 @@
 
 <body onhashchange="hashChange()">
 
-<!-- Navigation -->
-<nav class="w3-bar w3-white">
-    <a href="/" class="w3-button w3-bar-item">Home</a>
-    <a href="/methodology" class="w3-button w3-bar-item">Methodology</a>
-    <a href="/about" class="w3-button w3-bar-item">About</a>
-</nav>
+<%- include('banner.ejs') %>
 
-<!-- Content -->
-<section style="max-width:600px;text-align:center;margin:auto">
-  <header class="App-header">
-    <section style="max-width:-webkit-fill-available;text-align:left;margin:auto">
-      <h1>Campaign<br /> Connector</h1>
-    </section>
-    <h4>Connect with constituencies like yours to see what campaigns are working around the country...</h4>
-  </header>
+<%- include('header.ejs') %>
 
-  <div id="constitDropdown" class="dropdown-content">
-    <input type="text" placeholder="Search for your constituency.." id="constitInput" onkeyup="filterconstits()">
-  </div>
+<div id='results'></div>
 
-  <div id='results'></div>
-
-
-</section>
-
-
-<!-- Footer -->
-<footer class="w3-container w3-padding-64 w3-center w3-white">
-  <a href="https://www.facebook.com/campaignlablondon/"><i class="fa fa-facebook-official"></i></a>
-  <a href="https://mobile.twitter.com/campaignlab_"><i class="fa fa-twitter"></i></a>
-  <a href="https://github.com/CampaignLab"><i class="fa fa-github"></i></a>
-  <p class="w3-medium">
-    Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
-  </p>
-</footer>
+<%- include('footer.ejs') %>
 
 <script src="./analysis.js"></script>
 <script src="./app.js"></script>

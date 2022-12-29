@@ -2,6 +2,7 @@
 const express = require('express')
 const http = require('http')
 const fs = require('fs')
+const ejs = require('ejs')
 const server = express()
 const port = process.env.PORT || 5000
 
@@ -10,6 +11,8 @@ server.listen(port, () => console.info(`App listening on port ${port}`))
 
 // Static Files
 server.use(express.static('public'));
+analysis = JSON.parse(fs.readFileSync('public/analysis.json', 'utf8'));
+console.log(analysis)
 
 // Set View's
 server.set('views', './views');
@@ -20,6 +23,16 @@ server.get('', (req, res) => {
     res.render('index')
 })
 
+
+const constit_keys = Object.keys(analysis)
+for (i = 0; i < constit_keys.length; i++) {
+  server.get('/rank/'+constit_keys[i], (req, res) => {
+    res.render('index')
+  })
+}
+
+//server.get('/analysis', (req, res) => {
+//  res.
 //server.get('/about', (req, res) => {
 //   res.sendFile(__dirname + '/views/about.html')
 //})
