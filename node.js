@@ -24,12 +24,12 @@ server.get('', (req, res) => {
     res.render('index.ejs')
 })
 
-server.get('/connections/:id', (req, res) => {
-  res.render('constit-rank.ejs', {constit: req.params.id})
+server.get('/:constit/connections', (req, res) => {
+  res.render('constit-rank.ejs', {constit: req.params.constit})
 });
 
-server.get('/constituency/:slug', (req, res) => {
-  res.render('constit.ejs', {constit: req.params.slug})
+server.get('/:constit', (req, res) => {
+  res.render('constit.ejs', {constit: req.params.constit})
 });
 
 /*const constit_keys = Object.keys(analysis)

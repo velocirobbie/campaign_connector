@@ -47,9 +47,6 @@ const slugify = str =>
     .replace(/^-+|-+$/g, '');
 
 load()
-console.log(analysis)
-console.log(constit_keys)
-console.log(constit_names)
 
 
 
@@ -76,7 +73,7 @@ function appendConstit(div, name) {
   link.value = name;
   link.innerHTML = name;
   link.id = slugify(name);
-  link.href = '/connections/'+id;
+  link.href = slugify(name) + '/connections';
   link.style.display = '';
 
   div.appendChild(link);
@@ -152,7 +149,7 @@ function displayResultConstit(constit) {
   para1.setAttribute( 'class', 'result-header' )
   let link = document.createElement('a');
   link.innerHTML = constit.name
-  link.href = '../constituency/' + slugify(constit.name);
+  link.href = '../' + slugify(constit.name);
   para1.appendChild(link)
 
   let para2 = document.createElement('p');
@@ -167,9 +164,9 @@ function displayResultConstit(constit) {
 }
 
 
-function load_constit(key) {
-  console.log('here');
-  let name = constit_map(key, constit_keys, constit_names);
+function load_constit(slug) {
+  let name = constit_map(slug, constit_slugs, constit_names);
+  let key = constit_map(slug, constit_slugs, constit_keys);
   let results = document.getElementById("results");
 
   // header
@@ -195,7 +192,6 @@ function load_constit(key) {
   for (i = 0; i < analysis[key].results.length; i++) {
     constit = analysis[key].results[i];
     results.appendChild(displayResultConstit(constit));
-    console.log(constit);
   }
 
 };
