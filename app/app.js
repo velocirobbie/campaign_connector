@@ -72,10 +72,11 @@ function constit_map(key, match_list, target_list) {
 
 function appendConstit(div, name) {
   var link = document.createElement("a");
+  var id = constit_map(name, constit_names, constit_keys);
   link.value = name;
   link.innerHTML = name;
   link.id = slugify(name);
-  link.href = '#'+slugify(name);
+  link.href = '/connections/'+id;
   link.style.display = '';
 
   div.appendChild(link);
@@ -151,7 +152,7 @@ function displayResultConstit(constit) {
   para1.setAttribute( 'class', 'result-header' )
   let link = document.createElement('a');
   link.innerHTML = constit.name
-  link.href = '#' + slugify(constit.name);
+  link.href = '../constituency/' + slugify(constit.name);
   para1.appendChild(link)
 
   let para2 = document.createElement('p');
@@ -166,23 +167,10 @@ function displayResultConstit(constit) {
 }
 
 
-function hashChange() {
+function load_constit(key) {
   console.log('here');
-  let slug = window.location.hash.slice(1);
-  let name = constit_map(slug, constit_slugs, constit_names);
-  let key = constit_map(slug, constit_slugs, constit_keys);
+  let name = constit_map(key, constit_keys, constit_names);
   let results = document.getElementById("results");
-
-  // clear results div
-  while (results.children[0]) {
-      results.removeChild(results.children[0]);
-  }
-
-  // tidy dropdown
-  clearDropdown();
-  document.getElementById("constitInput").value = constit_map(
-    window.location.hash.slice(1), constit_slugs, constit_names
-  );
 
   // header
   let para = document.createElement('p');

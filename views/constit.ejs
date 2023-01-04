@@ -11,14 +11,33 @@
 
 <%- include('banner.ejs') %>
 
-<%- include('header.ejs') %>
+<!-- Content -->
+<section style="max-width:600px;text-align:center;margin:auto">
+  <header class="App-header">
+    <section style="max-width:-webkit-fill-available;text-align:left;margin:auto">
+      <h2><%= constit %></h2>
+    </section>
+  </header>
+</section>
+
+<div class="constit-data">
+  <h4>Election details</h4>
+  <h4>CLP contact info</h4>
+  <h4>Demographic info</h4>
+  <h4>Analysis</h4>
+</div>
+
 
 <div id='results'></div>
 
 <%- include('footer.ejs') %>
 
+
 <script src="/analysis.js"></script>
 <script src="/app.js"></script>
+<script>
+  load_constit('<%= constit %>')
+</script>
 
 
 </body>

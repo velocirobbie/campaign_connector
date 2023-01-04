@@ -11,6 +11,7 @@ server.listen(port, () => console.info(`App listening on port ${port}`))
 
 // Static Files
 server.use(express.static('public'));
+server.use(express.static('app'));
 analysis = JSON.parse(fs.readFileSync('public/analysis.json', 'utf8'));
 console.log(analysis)
 
@@ -20,16 +21,23 @@ server.set('view engine', 'ejs');
 
 // Navigation
 server.get('', (req, res) => {
-    res.render('index')
+    res.render('index.ejs')
 })
 
+server.get('/connections/:id', (req, res) => {
+  res.render('constit-rank.ejs', {constit: req.params.id})
+});
 
-const constit_keys = Object.keys(analysis)
+server.get('/constituency/:slug', (req, res) => {
+  res.render('constit.ejs', {constit: req.params.slug})
+});
+
+/*const constit_keys = Object.keys(analysis)
 for (i = 0; i < constit_keys.length; i++) {
   server.get('/rank/'+constit_keys[i], (req, res) => {
     res.render('index')
   })
-}
+}*/
 
 //server.get('/analysis', (req, res) => {
 //  res.

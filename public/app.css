@@ -1,3 +1,7 @@
+div.constit-data {
+  margin: 10px;
+}
+
 #results {
   margin-bottom: 10px;
 }
@@ -54,6 +58,14 @@ h1 {
   font-size: calc(30px + 2vmin);
   font-family: 'Bungee';
 }
+
+h2 {
+  color: #dc241f;
+  font-size: calc(15px + 2vmin);
+  font-family: 'Bungee';
+}
+
+
 
 .dropbtn:hover, .dropbtn:focus {
   background-color: #3e8e41;
