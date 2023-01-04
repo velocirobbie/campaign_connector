@@ -24,6 +24,14 @@ server.get('', (req, res) => {
     res.render('index.ejs')
 })
 
+server.get('/methodology', (req, res) => {
+  res.render('methodology.ejs')
+})
+
+server.get('/about', (req, res) => {
+  res.render('about.ejs')
+})
+
 server.get('/:constit/connections', (req, res) => {
   res.render('constit-rank.ejs', {constit: req.params.constit})
 });
