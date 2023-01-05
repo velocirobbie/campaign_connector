@@ -34,27 +34,15 @@ readJsonFile('data', console.log)
 console.log('here2');
 */
 
-const constit_keys = Object.keys(analysis)
+const constit_slugs = Object.keys(analysis)
 const constit_names = []
-const constit_slugs = []
-
-const slugify = str =>
-  str
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
 
 load()
 
-
-
 function load() {
-  for (i = 0; i < constit_keys.length; i++) {
-    name = analysis[constit_keys[i]].name;
+  for (i = 0; i < constit_slugs.length; i++) {
+    name = analysis[constit_slugs[i]].name;
     constit_names.push(name);
-    constit_slugs.push(slugify(name));
   }
 }
 
@@ -67,13 +55,12 @@ function constit_map(key, match_list, target_list) {
   return 'not found';
 }
 
-function appendConstit(div, name) {
+function appendConstit(div, name, slug) {
   var link = document.createElement("a");
-  var id = constit_map(name, constit_names, constit_keys);
   link.value = name;
   link.innerHTML = name;
-  link.id = slugify(name);
-  link.href = slugify(name) + '/connections';
+  link.id = slug;
+  link.href = slug + '/connections';
   link.style.display = '';
 
   div.appendChild(link);
@@ -90,7 +77,7 @@ function appendDummyConstit(div) {
 function showConstitDropdown() {
   div = document.getElementById("constitDropdown");
   for (i = 0; i < constit_names.length; i++) {
-    appendConstit(div, constit_names[i], i)
+    appendConstit(div, constit_names[i], constit_slugs[i])
   }
 }
 
@@ -128,13 +115,14 @@ function filterconstits() {
 
   for (i = 0; i < constit_names.length; i++) {
     name = constit_names[i]
+    slug = constit_slugs[i]
     if (name.toUpperCase().indexOf(filter) > -1) {
       // if more to show than allowed
       if (count >= max_to_show) {
         appendDummyConstit(div)
         break;
       }
-      appendConstit(div, name)
+      appendConstit(div, name, slug)
       count += 1
     }
   }
@@ -148,14 +136,19 @@ function displayResultConstit(constit) {
   let para1 = document.createElement('p');
   para1.setAttribute( 'class', 'result-header' )
   let link = document.createElement('a');
-  link.innerHTML = constit.name
-  link.href = '../' + slugify(constit.name);
+  link.innerHTML = analysis[constit.slug].name
+  link.href = '../' + constit.slug;
   para1.appendChild(link)
 
   let para2 = document.createElement('p');
   para2.setAttribute( 'class', 'result-sub' )
   swing = (constit.swing*100).toFixed(1) + '%'
-  para2.innerHTML = " swing:" + swing + "   similarity:" + constit.similarity + '%'
+  info = "swing: " + swing
+  if (constit.perc_dist) {
+    similarity = (constit.perc_dist).toFixed(0) + '%'
+    info += "    similarity: " + similarity
+  }
+  para2.innerHTML = info
 
   div.appendChild(para1)
   div.appendChild(para2)
@@ -165,21 +158,18 @@ function displayResultConstit(constit) {
 
 
 function load_constit(slug) {
-  let name = constit_map(slug, constit_slugs, constit_names);
-  let key = constit_map(slug, constit_slugs, constit_keys);
+  let name = analysis[slug].name;
   let results = document.getElementById("results");
 
   // header
   let para = document.createElement('p');
 
-  swing = (analysis[key].swing*100).toFixed(1) + '%'
+  swing = (analysis[slug].swing*100).toFixed(1) + '%'
   let text = (
     "In the 2019 election, " + name + " had a " + swing + " labour swing, " +
-    "compared to a national average of -7.9%.<br>"
+    "compared to a national average of -7.9%.<br>" + 
+    name + " " + analysis[slug].message + " "
   )
-  if (analysis[key].congratulation) {
-    text += "This was comparatively a very good local campaign! "
-  }
   text += (
     "Check out these other constituencies which had better than average labour swings " +
     "and are similar demographics to " + name + "."
@@ -188,9 +178,9 @@ function load_constit(slug) {
   results.appendChild(para);
 
   // results
-  results.appendChild(displayResultConstit(analysis[key]));
-  for (i = 0; i < analysis[key].results.length; i++) {
-    constit = analysis[key].results[i];
+  results.appendChild(displayResultConstit(analysis[slug]));
+  for (i = 0; i < analysis[slug].connections.length; i++) {
+    constit = analysis[slug].connections[i];
     results.appendChild(displayResultConstit(constit));
   }
 
