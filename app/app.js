@@ -162,7 +162,7 @@ function load_constit(slug) {
   let results = document.getElementById("results");
 
   // header
-  let para = document.createElement('p');
+  let para = document.createElement('h6');
 
   swing = (analysis[slug].swing*100).toFixed(1) + '%'
   let text = (

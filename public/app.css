@@ -1,40 +1,8 @@
-div.constit-data {
-  margin: 10px;
-}
-
-#results {
-  margin-bottom: 10px;
-}
-
-.result-box {
-  /*border-color: #dc241f!important;*/
-  border-color: #dddddd!important;
-  padding: 8px 16px;
-  border: 1px solid;
-  margin-top: 16px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 400px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.result-box:hover {
-  box-shadow: 0 0 10px #dc241f!important;
-}
-
-
-p.result-header {
-  font-size: 18px!important;
-  text-align: left;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-p.result-sub {
-  font-size: 12px;
-  text-align: left;
-  margin-top: 0px;
-  margin-bottom: 0px;
+section.app-body {
+  max-width: 600px;
+  text-align: center;
+  margin: auto;
+  padding: 0px 10px;
 }
 
 .App {
@@ -65,7 +33,9 @@ h2 {
   font-family: 'Bungee';
 }
 
-
+h6 {
+  text-align: left
+}
 
 .dropbtn:hover, .dropbtn:focus {
   background-color: #3e8e41;
@@ -115,3 +85,44 @@ h2 {
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+
+#results {
+  margin-bottom: 10px;
+}
+
+.result-box {
+  /*border-color: #dc241f!important;*/
+  border-color: #dddddd!important;
+  padding: 8px 16px;
+  border: 1px solid;
+  margin-top: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.result-box:hover {
+  box-shadow: 0 0 10px #dc241f!important;
+}
+
+
+p.result-header {
+  font-size: 18px!important;
+  text-align: left;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+p.result-sub {
+  font-size: 12px;
+  text-align: left;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+div.constit-data {
+  margin: 10px;
+}
+
+
