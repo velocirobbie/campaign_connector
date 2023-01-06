@@ -11,10 +11,38 @@ import slugify
 
 import campaignlabprojects as clp
 
-pd.reset_option('all')
+pd.reset_option("all")
+YEAR = 19
+COMPARE_YEAR = 17
 
-def get_constit_scores(year=19, compare_year=17):
-    election_results = clp.read_in_election_results()
+
+def get_election_results():
+    return clp.read_in_election_results()
+
+
+def get_election_summary(election_results):
+    party_votes = {"con", "lab", "ld", "grn", "snp", "pc", "ukip", "other"}
+    party_pc_votes = {party+"_pc" for party in party_votes}
+
+    cols = (
+        ["total", "winner"]  # ,"Registered Voters",  "Turnout"]
+        + list(party_votes)
+        + list(party_pc_votes)
+    )
+
+    year = election_results[YEAR]
+    compare_year= election_results[COMPARE_YEAR]
+    compare_year = compare_year.rename(columns={'total_votes': 'total'})
+    compare_year['other'] = compare_year['total'] - compare_year[party_votes-{'other'}].sum(axis=1)
+    compare_year['other_pc'] = 100 - compare_year[party_pc_votes-{'other_pc'}].sum(axis=1)
+
+    year = year[cols]
+    compare_year = compare_year[cols]
+    df = pd.merge(year, compare_year, left_index=True, right_index=True, suffixes=(f'_{YEAR}', f'_{COMPARE_YEAR}'))
+    return df
+
+
+def get_constit_scores(election_results, year=YEAR, compare_year=COMPARE_YEAR):
 
     uns = clp.score_campaigns_uns(
         election_results[year], election_results[compare_year]
@@ -178,7 +206,9 @@ def list_significances(constit, significance_matrix, scores, N=5):
 def calc_nearby_good_matrix(demographic_data, results):
     dist_matrix = calc_dist_matrix(demographic_data, exponent, base=10)
     relevance_matrix = np.zeros(dist_matrix.shape)
-    np.divide(np.array(results), dist_matrix, where=dist_matrix != 0, out=relevance_matrix)
+    np.divide(
+        np.array(results), dist_matrix, where=dist_matrix != 0, out=relevance_matrix
+    )
     return relevance_matrix
 
 
@@ -218,12 +248,12 @@ def list_relevant_connections(constit, relevance_matrix, N=5):
     for i in range(N):
         j = most_signif[i]
         connection = Connection(
-                slug=slugify.slugify(constits_name[j]),
-                swing=scores.loc[constits_id[j], 'uns'],
-                dist=dist_matrix[index, j],
-                perc_dist=perc_dist_matrix[index, j],
-                relevance=relevance_matrix[index, j],
-                score_contribution=significance_matrix[index, j],
+            slug=slugify.slugify(constits_name[j]),
+            swing=scores.loc[constits_id[j], "uns"],
+            dist=dist_matrix[index, j],
+            perc_dist=perc_dist_matrix[index, j],
+            relevance=relevance_matrix[index, j],
+            score_contribution=significance_matrix[index, j],
         )
         connections.append(asdict(connection))
     return connections
@@ -238,6 +268,8 @@ class Constituency:
     model_result: float
     message: str
     connections: []
+    election_data: dict()
+
 
 def round_floats(o, n=3):
     if isinstance(o, float):
@@ -248,8 +280,11 @@ def round_floats(o, n=3):
         return [round_floats(x) for x in o]
     return o
 
+
 if __name__ == "__main__":
-    scores = get_constit_scores()
+    election_results = get_election_results()
+    election_df = get_election_summary(election_results)
+    scores = get_constit_scores(election_results)
     demographic_data, constits_id, constits_name = get_demographic_data(scores)
     scores = scores.loc[constits_id]  # only interested in these constits now
 
@@ -284,35 +319,33 @@ if __name__ == "__main__":
     )
 
     relevance_matrix = calc_nearby_good_matrix(
-            demographic_data, results["uns_exp_density"],
+        demographic_data,
+        results["uns_exp_density"],
     )
     out = {}
     for i, name in id_to_name.items():
-        model_result = results.loc[i, 'uns_exp_density']
+        model_result = results.loc[i, "uns_exp_density"]
         slug = slugify.slugify(name)
         constit = Constituency(
-                id=i,
-                name=name,
-                slug=slug,
-                swing=scores.loc[i, 'uns'],
-                model_result=model_result,
-                message=get_message(model_result),
-                connections=list_relevant_connections(i, relevance_matrix, N=5)
+            id=i,
+            name=name,
+            slug=slug,
+            swing=scores.loc[i, "uns"],
+            model_result=model_result,
+            message=get_message(model_result),
+            connections=list_relevant_connections(i, relevance_matrix, N=5),
+            election_data=election_df.loc[i].to_dict(),
         )
         out[slug] = asdict(constit)
 
-    json.dump(
-        round_floats(out), 
-        open('analysis.json', 'w'),
-        indent=4
-    )
+    json.dump(round_floats(out), open("analysis.json", "w"), indent=4)
 
     mentions = []
 
     for i in out:
-        mentions += [out[i]['message']]
+        mentions += [out[i]["message"]]
     print()
-    print('Distribution of result messages')
+    print("Distribution of result messages")
     for m, count in collections.Counter(mentions).items():
         print(count, m)
     print()
