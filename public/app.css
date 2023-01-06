@@ -73,6 +73,7 @@ h6 {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .dropdown-content a {
@@ -108,6 +109,7 @@ h6 {
 
 
 p.result-header {
+  font-family: "Segoe UI",Arial,sans-serif;
   font-size: 18px!important;
   text-align: left;
   margin-top: 0px;
@@ -115,7 +117,8 @@ p.result-header {
 }
 
 p.result-sub {
-  font-size: 12px;
+  font-family: "Segoe UI",Arial,sans-serif;
+  font-size: 15px;
   text-align: left;
   margin-top: 0px;
   margin-bottom: 0px;

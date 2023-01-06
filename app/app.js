@@ -146,7 +146,7 @@ function displayResultConstit(constit) {
   info = "swing: " + swing
   if (constit.perc_dist) {
     similarity = (constit.perc_dist).toFixed(0) + '%'
-    info += "    similarity: " + similarity
+    info += ",  similarity: " + similarity
   }
   para2.innerHTML = info
 
