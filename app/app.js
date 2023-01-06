@@ -186,6 +186,11 @@ function load_constit(slug) {
 
 };
 
+function set_search_value(slug) {
+  name = analysis[slug].name
+  let input = document.getElementById("constitInput");
+  input.value = name
+};
 
 
 function print_window(message) {
