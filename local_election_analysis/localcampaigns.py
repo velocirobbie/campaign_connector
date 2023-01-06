@@ -61,18 +61,20 @@ def get_constit_scores(election_results, year=YEAR, compare_year=COMPARE_YEAR):
 def get_demographic_data(scores):
     census = clp.read_in_census()
 
-    features = [
-        "c11PopulationDensity",
-        "c11HouseOwned",
-        "c11CarsNone",
-        "c11EthnicityWhite",
-        "c11Unemployed",
-        "c11Retired",
-        "c11FulltimeStudent",
-        "c11Age65to74",
-        "c11DeprivedNone",
-    ]
-    demographic_data = census[features]
+    features = {
+            "c11PopulationDensity": "Population density",
+            "c11HouseOwned": "House Ownership",
+            "c11CarsNone": "Car ownership",
+            "c11EthnicityWhite": "White ethnicity",
+            "c11Unemployed": "Unemployed",
+            "c11Retired": "Retired",
+            "c11FulltimeStudent": "Student",
+            "c11Age65to74": "Age65to74",
+            "c11DeprivedNone": "Households not deprived",
+    }
+    demographic_data = census[features].rename(columns=features)
+    for col in ['Car ownership']:
+        demographic_data[col] = 100 - demographic_data[col]
 
     # only want rows we have election data for
     demographic_data = demographic_data.loc[scores.index]
@@ -269,6 +271,7 @@ class Constituency:
     message: str
     connections: []
     election_data: dict()
+    demographic_data: dict()
 
 
 def round_floats(o, n=3):
@@ -335,6 +338,7 @@ if __name__ == "__main__":
             message=get_message(model_result),
             connections=list_relevant_connections(i, relevance_matrix, N=5),
             election_data=election_df.loc[i].to_dict(),
+            demographic_data=demographic_data.loc[i].to_dict(),
         )
         out[slug] = asdict(constit)
 
