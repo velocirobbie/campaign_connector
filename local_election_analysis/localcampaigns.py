@@ -39,7 +39,7 @@ def get_election_summary(election_results):
     year = year[cols]
     compare_year = compare_year[cols]
     df = pd.merge(year, compare_year, left_index=True, right_index=True, suffixes=(f'_{YEAR}', f'_{COMPARE_YEAR}'))
-    return df
+    return df.fillna(0)
 
 
 def get_constit_scores(election_results, year=YEAR, compare_year=COMPARE_YEAR):
@@ -73,6 +73,8 @@ def get_demographic_data(scores):
             "c11DeprivedNone": "Households not deprived",
     }
     demographic_data = census[features].rename(columns=features)
+    print(demographic_data.max())
+    print(demographic_data.mean())
     for col in ['Car ownership']:
         demographic_data[col] = 100 - demographic_data[col]
 
@@ -342,7 +344,7 @@ if __name__ == "__main__":
         )
         out[slug] = asdict(constit)
 
-    json.dump(round_floats(out), open("analysis.json", "w"), indent=4)
+    json.dump(round_floats(out), open("analysis.json", "w"), indent=4, allow_nan=True)
 
     mentions = []
 
