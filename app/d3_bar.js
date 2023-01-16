@@ -177,5 +177,3 @@ function election_bar(constit) {
   .attr("transform", `translate(${margin.left},0)`)
     .call(svg => svg.select(".domain").remove())
 
-
-}
