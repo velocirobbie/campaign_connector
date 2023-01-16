@@ -17,7 +17,7 @@ var party_keys = {
   'UKIP': {
     'key': 'ukip',
     'color': 'purple',
-    'rgba': 'rgba(239,230,0',
+    'rgba': 'rgba(109,49,119',
   },
   'Green': {
     'key': 'grn',
@@ -116,6 +116,10 @@ function election_bar(constit) {
     .domain([0, max_y])
     .range([ height, 0]);
 
+  var div = d3.select("body").append("div")
+     .attr("class", "tooltip-bar")
+     .style("opacity", 0);
+
   console.log(data)
   // Bars
   svg.append("g")
@@ -133,10 +137,36 @@ function election_bar(constit) {
     }; }); })
     .enter().append("rect")
       .attr("x", function(d) { return xSubgroup(d.key); })
-      .attr("y", function(d) { console.log(d); return y(d.value); })
       .attr("width", xSubgroup.bandwidth())
-      .attr("height", function(d) { return height - y(d.value); })
-      .attr("fill", function(d) { return d.color });
+      .attr("y", function(d) { return height; })
+      .attr("height", function(d) { return 0; })
+      .attr("fill", function(d) { return d.color })
+    //Our new hover effects
+    .on('mouseover', function (d, i) {
+          d3.select(this).transition()
+               .duration('50')
+               .attr('opacity', '.7');
+          div.transition()
+               .duration(50)
+               .style("opacity", 1);
+          div.html(d.value)
+            .style("left",(10) + "px")
+            .style("top", (10) + "px");
+    })
+    .on('mouseout', function (d, i) {
+          d3.select(this).transition()
+               .duration('50')
+               .attr('opacity', '1');
+          div.transition()
+               .duration('50')
+               .style("opacity", 0);
+    })
+
+  svg.selectAll('rect')
+    .transition()
+    .duration(1000)
+    .attr("y", function(d) { return y(d.value); })
+    .attr("height", function(d) { return height - y(d.value); })
 
   svg
   .attr("transform", `translate(${margin.left},0)`)
