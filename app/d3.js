@@ -29,6 +29,11 @@ var party_keys = {
     'color': 'green',
     'rgba': 'rgba(63,132,40',
   },
+  'Other': {
+    'key': 'other',
+    'color': 'other',
+    'rgba': 'rgba(150,150,150',
+  },
 }
 
 

@@ -130,13 +130,16 @@ function load_constit(slug) {
 
   swing = (analysis[slug].swing*100).toFixed(1) + '%'
   let text = (
-    "In the 2019 election, " + name + " had a " + swing + " labour swing, " +
-    "compared to a national average of -7.9%.<br>" + 
-    name + " " + analysis[slug].message + " "
+    "In the 2019 election, Labour vote share fell, with an average swing of -7.9%, " +
+    "but performed better with some types of voters than others. " +
+    name + " had a " + swing + " labour swing. " +
+    name + " " + analysis[slug].message + "<br><br>"
   )
   text += (
-    "Check out these other constituencies which had better than average labour swings " +
-    "and are similar demographics to " + name + "."
+    "Below are some constituencies with similar demographic makeups to " + name + ", " +
+    "and had a better than average labour swing. " +
+    "Click on the constituencies to see their election results, " +
+    "get in touch with them to see how they did it!"
   )
   para.innerHTML = text
   results.appendChild(para);
