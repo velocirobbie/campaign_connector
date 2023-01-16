@@ -34,7 +34,7 @@ def get_election_summary(election_results):
     compare_year= election_results[COMPARE_YEAR]
     compare_year = compare_year.rename(columns={'total_votes': 'total'})
     compare_year['other'] = compare_year['total'] - compare_year[party_votes-{'other'}].sum(axis=1)
-    compare_year['other_pc'] = 100 - compare_year[party_pc_votes-{'other_pc'}].sum(axis=1)
+    compare_year['other_pc'] = 1 - compare_year[party_pc_votes-{'other_pc'}].sum(axis=1)
 
     year = year[cols]
     compare_year = compare_year[cols]
