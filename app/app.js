@@ -94,15 +94,16 @@ function filterconstits() {
 
 
 function displayResultConstit(constit) {
+  let link = document.createElement('a');
+  link.href = '/' + constit.slug;
+  link.setAttribute('style', 'text-decoration: none')
+
   let div = document.createElement('div');
   div.setAttribute( 'class', 'result-box' )
 
   let para1 = document.createElement('p');
   para1.setAttribute( 'class', 'result-header' )
-  let link = document.createElement('a');
-  link.innerHTML = analysis[constit.slug].name
-  link.href = '/' + constit.slug;
-  para1.appendChild(link)
+  para1.innerHTML = analysis[constit.slug].name
 
   let para2 = document.createElement('p');
   para2.setAttribute( 'class', 'result-sub' )
@@ -114,10 +115,11 @@ function displayResultConstit(constit) {
   }
   para2.innerHTML = info
 
+  link.appendChild(div)
   div.appendChild(para1)
   div.appendChild(para2)
 
-  return div
+  return link
 }
 
 
@@ -125,24 +127,27 @@ function load_constit(slug) {
   let name = analysis[slug].name;
   let results = document.getElementById("results");
 
-  // header
-  let para = document.createElement('h6');
-
   swing = (analysis[slug].swing*100).toFixed(1) + '%'
-  let text = (
+  let text1 = (
     "In the 2019 election, Labour vote share fell, with an average swing of -7.9%, " +
-    "but performed better with some types of voters than others. " +
-    name + " had a " + swing + " labour swing. " +
-    name + " " + analysis[slug].message + "<br><br>"
+    "but performed better with some types of voters than others."
   )
-  text += (
+  let text2 = (
+    name + " had a " + swing + " labour swing. " +
+    name + " " + analysis[slug].message
+  )
+  let text3 = (
     "Below are some constituencies with similar demographic makeups to " + name + ", " +
-    "and had a better than average labour swing. " +
+    "which had a better than average labour swing. " +
     "Click on the constituencies to see their election results, " +
     "get in touch with them to see how they did it!"
   )
-  para.innerHTML = text
-  results.appendChild(para);
+  let paras = [text1, text2, text3]
+  for (i = 0; i < paras.length; i++) {
+    let para = document.createElement('h6');
+    para.innerHTML = paras[i]
+    results.appendChild(para);
+  }
 
   // results
   results.appendChild(displayResultConstit(analysis[slug]));
