@@ -24,7 +24,7 @@ function appendConstit(div, name, slug) {
   link.value = name;
   link.innerHTML = name;
   link.id = slug;
-  link.href = slug + '/connections';
+  link.href = '/' + slug + '/connections';
   link.style.display = '';
 
   div.appendChild(link);
