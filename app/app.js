@@ -101,7 +101,7 @@ function displayResultConstit(constit) {
   para1.setAttribute( 'class', 'result-header' )
   let link = document.createElement('a');
   link.innerHTML = analysis[constit.slug].name
-  link.href = '../' + constit.slug;
+  link.href = '/' + constit.slug;
   para1.appendChild(link)
 
   let para2 = document.createElement('p');
