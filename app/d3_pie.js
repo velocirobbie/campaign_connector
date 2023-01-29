@@ -1,4 +1,4 @@
-function election_pie(constit) {
+function election_pie(constit, id) {
   var party_keys = {
     "Labour":{
       'key':'lab',
@@ -53,7 +53,9 @@ function election_pie(constit) {
 
   var radius = Math.min(width, height) / 2 - margin
 
-  var svg = d3.select("#election-pie")
+  console.log(id);
+  console.log(d3.select('#'+id));
+  var svg = d3.select('#'+id)
     .append("svg")
       .attr("width", width)
       .attr("height", height)
@@ -72,8 +74,6 @@ function election_pie(constit) {
     data[party] = val;
     colors.push(color);
   }
-  console.log(data)
-  console.log('hello')
 
   var pie = d3.pie()
     .value(function(d) {return d.value; })
@@ -95,6 +95,6 @@ function election_pie(constit) {
     .attr('fill', function(d){ return(color(d.data.key)) })
     .attr("stroke", "white")
     .style("stroke-width", "2px")
-    .style("opacity", 0.7)
+    .style("opacity", 1)
 }
 

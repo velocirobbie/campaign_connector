@@ -115,9 +115,14 @@ function displayResultConstit(constit) {
   }
   para2.innerHTML = info
 
+  let pie = document.createElement('div');
+  pie_name = 'result-pie-' + constit.slug
+  pie.setAttribute( 'id', pie_name)
+
   link.appendChild(div)
   div.appendChild(para1)
   div.appendChild(para2)
+  div.appendChild(pie)
 
   return link
 }
@@ -151,9 +156,12 @@ function load_constit(slug) {
 
   // results
   results.appendChild(displayResultConstit(analysis[slug]));
+  election_pie(slug, 'result-pie-'+slug);
   for (i = 0; i < analysis[slug].connections.length; i++) {
     constit = analysis[slug].connections[i];
     results.appendChild(displayResultConstit(constit));
+    pie_name = 'result-pie-' + constit.slug;
+    election_pie(constit.slug, pie_name);
   }
 
 };
