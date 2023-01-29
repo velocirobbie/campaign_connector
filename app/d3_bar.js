@@ -1,69 +1,69 @@
-var party_keys = {
-  "Labour":{
-    'key':'lab',
-    'color': 'red',
-    'rgba': 'rgba(213,0,0',
-  },
-  "Conservative": {
-    'key': 'con',
-    'color': 'blue',
-    'rgba': 'rgba(0,135,220',
-  },
-  "Lib Dems": {
-    'key': 'ld',
-    'color': 'orange',
-    'rgba': 'rgba(253,187,48',
-  },
-  'UKIP': {
-    'key': 'ukip',
-    'color': 'purple',
-    'rgba': 'rgba(109,49,119',
-  },
-  'Green': {
-    'key': 'grn',
-    'color': 'snp',
-    'rgba': 'rgba(0,116,95',
-  },
-  'Plaid Cymru': {
-    'key': 'pc',
-    'color': 'green',
-    'rgba': 'rgba(63,132,40',
-  },
-  'Other': {
-    'key': 'other',
-    'color': 'other',
-    'rgba': 'rgba(150,150,150',
-  },
-}
-
-
-// set the dimensions and margins of the graph
-var margin = {top: 30, right: 30, bottom: 70, left: 60},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
-var svg = d3.select("#election-bar")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
-
-function party_color(party, year) {
-  var rgba = party_keys[party]['rgba']
-  var a;
-  if (year == '19') {
-    a = 1
-  } else {
-    a = 0.3
-  }
-  return rgba + ',' + a + ')'
-}
-
-
 function election_bar(constit) {
+  var party_keys = {
+    "Labour":{
+      'key':'lab',
+      'color': 'red',
+      'rgba': 'rgba(213,0,0',
+    },
+    "Conservative": {
+      'key': 'con',
+      'color': 'blue',
+      'rgba': 'rgba(0,135,220',
+    },
+    "Lib Dems": {
+      'key': 'ld',
+      'color': 'orange',
+      'rgba': 'rgba(253,187,48',
+    },
+    'UKIP': {
+      'key': 'ukip',
+      'color': 'purple',
+      'rgba': 'rgba(109,49,119',
+    },
+    'Green': {
+      'key': 'grn',
+      'color': 'snp',
+      'rgba': 'rgba(0,116,95',
+    },
+    'Plaid Cymru': {
+      'key': 'pc',
+      'color': 'green',
+      'rgba': 'rgba(63,132,40',
+    },
+    'Other': {
+      'key': 'other',
+      'color': 'other',
+      'rgba': 'rgba(150,150,150',
+    },
+  }
+
+
+  // set the dimensions and margins of the graph
+  var margin = {top: 30, right: 30, bottom: 70, left: 60},
+      width = 460 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
+
+  // append the svg object to the body of the page
+  var svg = d3.select("#election-bar")
+    .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+  function party_color(party, year) {
+    var rgba = party_keys[party]['rgba']
+    var a;
+    if (year == '19') {
+      a = 1
+    } else {
+      a = 0.3
+    }
+    return rgba + ',' + a + ')'
+  }
+
+
   var data = [];
   var parties = Object.keys(party_keys);
 
