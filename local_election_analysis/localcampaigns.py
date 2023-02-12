@@ -16,8 +16,9 @@ pd.reset_option("all")
 YEAR = 19
 COMPARE_YEAR = 17
 
-TWITTER = 'CLP Twitter Handles.xlsx - Sheet1.csv'
 DATA = 'data'
+TWITTER = 'CLP Twitter Handles.xlsx - Sheet1.csv'
+NO_TWITTER = 'not found'
 
 def get_election_results():
     return clp.read_in_election_results()
@@ -270,6 +271,7 @@ def get_twitter():
     df = pd.read_csv(path)
     df['CLP'] = df['CLP'].apply(slugify.slugify)
     df = df[['CLP', 'Twitter Handle']]
+    df['Twitter Handle'] = df['Twitter Handle'].replace('-', NO_TWITTER).fillna(NO_TWITTER)
     return df.set_index('CLP')
 
 
@@ -347,7 +349,7 @@ if __name__ == "__main__":
         try:
             handle = twitter.loc[slug, 'Twitter Handle']
         except KeyError:
-            handle = np.nan
+            handle = NO_TWITTER
             print('No twitter match:', i, name, slug)
 
         model_result = results.loc[i, "uns_exp_density"]
