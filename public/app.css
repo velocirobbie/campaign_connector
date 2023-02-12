@@ -28,7 +28,7 @@ h1 {
 
 h2 {
   color: #dc241f;
-  font-size: calc(15px + 2vmin);
+  font-size: calc(22px + 2vmin);
   font-family: 'Bungee';
 }
 
@@ -135,10 +135,15 @@ p.result-sub {
 .constit-data {
   margin: 10px;
   display: grid;
-  grid-template-columns: 20% 80%;
   text-align: left;
   gap: 1em;
 }
 
 
+.contact-data {
+  text-align: middle;
+}
 
+.block {
+  text-align: center;
+}

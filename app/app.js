@@ -187,20 +187,43 @@ function print_window(message) {
   window.alert(message)
 }
 
+function get_twitter_link(twitter) {
+  if (typeof twitter === 'string' || twitter instanceof String) {
+    link = (
+      'Twitter:  <a href="https://mobile.twitter.com/' + twitter + 
+      '" target="_blank" rel="noopener noreferrer">' +
+      '<i class="fa fa-twitter"></i>' + twitter + '</a>'
+    )
+  } else {
+    link = 'Twitter: not found'
+  }
+  return link
+}
+
+
+
 function constit_details(slug) {
   let name = analysis[slug].name;
   let title = document.getElementById("constit-title")
+
   title.innerHTML = name;
   let twitter = analysis[slug].twitter;
-  let contact = document.getElementById("contact-info")
-  text = (
+  let twitter_link = get_twitter_link(twitter);
+  
+  let contact_block = document.getElementById("contact-info")
+  let contact_links = document.getElementById("contact-links")
+  let contact_blurb = document.createElement('h4')
+  let contact_info = document.createElement('h4')
+
+  contact_blurb.innerHTML = (
     "Get in touch with " + name + " CLP. Find out more about how they " +
-    "campaigned in the last election!<br>" +
-    'Twitter:  <a href="https://mobile.twitter.com/' + twitter + '"><i class="fa fa-twitter"></i>' + twitter + '</a><br>' +
-    'Website: -<br>' +
-    'Email: -'
+    "campaigned in the last election!<br>"
+  )
+  contact_info.innerHTML = (
+    twitter_link
   )
 
-  contact.innerHTML = text
+  contact_block.appendChild(contact_blurb)
+  contact_block.appendChild(contact_info)
 }
 
