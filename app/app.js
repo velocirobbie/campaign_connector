@@ -188,7 +188,7 @@ function print_window(message) {
 }
 
 function get_twitter_link(twitter) {
-  if (typeof twitter === 'string' || twitter instanceof String) {
+  if (twitter != 'not found') {
     link = (
       'Twitter:  <a href="https://mobile.twitter.com/' + twitter + 
       '" target="_blank" rel="noopener noreferrer">' +
