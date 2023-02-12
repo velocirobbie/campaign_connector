@@ -148,7 +148,7 @@ function load_constit(slug) {
   let text2 = (
     name + " had a " + swing + " labour swing. " +
     name + " " + analysis[slug].message +
-    "Below are some constituencies with similar demographic make up to " + name +
+    " Below are some constituencies with similar demographic make up to " + name +
     " who also did better than average."
   )
   let text3 = (
