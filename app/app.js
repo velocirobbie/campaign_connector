@@ -187,3 +187,20 @@ function print_window(message) {
   window.alert(message)
 }
 
+function constit_details(slug) {
+  let name = analysis[slug].name;
+  let title = document.getElementById("constit-title")
+  title.innerHTML = name;
+  let twitter = analysis[slug].twitter;
+  let contact = document.getElementById("contact-info")
+  text = (
+    "Get in touch with " + name + " CLP. Find out more about how they " +
+    "campaigned in the last election!<br>" +
+    'Twitter:  <a href="https://mobile.twitter.com/' + twitter + '"><i class="fa fa-twitter"></i>' + twitter + '</a><br>' +
+    'Website: -<br>' +
+    'Email: -'
+  )
+
+  contact.innerHTML = text
+}
+

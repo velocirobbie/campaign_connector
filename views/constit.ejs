@@ -8,16 +8,15 @@
 <!-- Content -->
 <header class="App-header">
   <section style="max-width:-webkit-fill-available;text-align:left;margin:auto">
-    <h2><%= constit %></h2>
+    <h2 id="constit-title"></h2>
   </section>
 </header>
 
 <div class="constit-data">
-  <h4>Election details</h4>
-  <div id="election-bar"></div>
-  <h4>CLP contact info</h4>
-  <h4>Demographic info</h4>
-  <h4>Analysis</h4>
+  <div class="block">Contact</div>
+  <div class="block" id="contact-info"></div>
+  <div class="block">Election results</div>
+  <div class="block" id="election-bar"></div>
 </div>
 
 
@@ -34,6 +33,7 @@
 <script>
   load_constit('<%= constit %>')
   election_bar('<%= constit %>')
+  constit_details('<%= constit %>')
 </script>
 
 

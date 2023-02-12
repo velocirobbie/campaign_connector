@@ -132,8 +132,13 @@ p.result-sub {
   margin-bottom: 0px;
 }
 
-div.constit-data {
+.constit-data {
   margin: 10px;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  text-align: left;
+  gap: 1em;
 }
+
 
 
