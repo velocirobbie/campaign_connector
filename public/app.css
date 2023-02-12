@@ -92,7 +92,6 @@ h6 {
 }
 
 .result-box {
-  /*border-color: #dc241f!important;*/
   border-color: #dddddd!important;
   padding: 8px 16px;
   border: 1px solid;
@@ -102,12 +101,22 @@ h6 {
   width: 400px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .result-box:hover {
   box-shadow: 0 0 10px #dc241f!important;
 }
 
+.result-words {
+  flex: 2;
+}
+
+.result-pie {
+  flex: 1;
+}
 
 p.result-header {
   font-family: "Segoe UI",Arial,sans-serif;

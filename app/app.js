@@ -101,6 +101,12 @@ function displayResultConstit(constit) {
   let div = document.createElement('div');
   div.setAttribute( 'class', 'result-box' )
 
+  let div_words = document.createElement('div');
+  div_words.setAttribute( 'class', 'result-words' )
+
+  let div_pie = document.createElement('div');
+  div_pie.setAttribute( 'class', 'result-pie' )
+
   let para1 = document.createElement('p');
   para1.setAttribute( 'class', 'result-header' )
   para1.innerHTML = analysis[constit.slug].name
@@ -111,7 +117,7 @@ function displayResultConstit(constit) {
   info = "swing: " + swing
   if (constit.perc_dist) {
     similarity = (constit.perc_dist).toFixed(0) + '%'
-    info += ",  similarity: " + similarity
+    info += "<br>similarity: " + similarity
   }
   para2.innerHTML = info
 
@@ -119,10 +125,13 @@ function displayResultConstit(constit) {
   pie_name = 'result-pie-' + constit.slug
   pie.setAttribute( 'id', pie_name)
 
+  div_pie.appendChild(pie)
+  div_words.appendChild(para1)
+  div_words.appendChild(para2)
+
+  div.appendChild(div_words)
+  div.appendChild(div_pie)
   link.appendChild(div)
-  div.appendChild(para1)
-  div.appendChild(para2)
-  div.appendChild(pie)
 
   return link
 }

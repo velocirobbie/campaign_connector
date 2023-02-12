@@ -48,8 +48,8 @@ function election_pie(constit, id) {
 
   // set the dimensions and margins of the graph
   var margin = 1,
-      width = 100,
-      height = 100;
+      width = 80,
+      height = 80;
 
   var radius = Math.min(width, height) / 2 - margin
 
