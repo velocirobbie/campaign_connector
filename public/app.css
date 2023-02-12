@@ -146,5 +146,7 @@ p.result-sub {
 }
 
 .block {
+  display: block;
+  overflow: auto;
   text-align: center;
 }
