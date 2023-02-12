@@ -16,7 +16,6 @@ section.app-body {
   align-items: left;
   justify-content: center;
   font-size: calc(5px + 2vmin);
-  color: rgb(36, 25, 25);
   text-align: left;
   margin-top: 50px;
 }
