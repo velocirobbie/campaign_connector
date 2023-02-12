@@ -2,6 +2,7 @@ from dataclasses import dataclass, asdict
 import math
 import json
 import collections
+import os
 
 import numpy as np
 import pandas as pd
@@ -15,6 +16,8 @@ pd.reset_option("all")
 YEAR = 19
 COMPARE_YEAR = 17
 
+TWITTER = 'CLP Twitter Handles.xlsx - Sheet1.csv'
+DATA = 'data'
 
 def get_election_results():
     return clp.read_in_election_results()
@@ -262,6 +265,13 @@ def list_relevant_connections(constit, relevance_matrix, N=5):
         connections.append(asdict(connection))
     return connections
 
+def get_twitter():
+    path = os.path.join(DATA, TWITTER)
+    df = pd.read_csv(path)
+    df['CLP'] = df['CLP'].apply(slugify.slugify)
+    df = df[['CLP', 'Twitter Handle']]
+    return df.set_index('CLP')
+
 
 @dataclass
 class Constituency:
@@ -274,6 +284,7 @@ class Constituency:
     connections: []
     election_data: dict()
     demographic_data: dict()
+    twitter: str
 
 
 def round_floats(o, n=3):
@@ -287,6 +298,8 @@ def round_floats(o, n=3):
 
 
 if __name__ == "__main__":
+    twitter = get_twitter()
+
     election_results = get_election_results()
     election_df = get_election_summary(election_results)
     scores = get_constit_scores(election_results)
@@ -329,8 +342,15 @@ if __name__ == "__main__":
     )
     out = {}
     for i, name in id_to_name.items():
-        model_result = results.loc[i, "uns_exp_density"]
         slug = slugify.slugify(name)
+
+        try:
+            handle = twitter.loc[slug, 'Twitter Handle']
+        except KeyError:
+            handle = np.nan
+            print('No twitter match:', i, name, slug)
+
+        model_result = results.loc[i, "uns_exp_density"]
         constit = Constituency(
             id=i,
             name=name,
@@ -341,6 +361,7 @@ if __name__ == "__main__":
             connections=list_relevant_connections(i, relevance_matrix, N=5),
             election_data=election_df.loc[i].to_dict(),
             demographic_data=demographic_data.loc[i].to_dict(),
+            twitter=handle,
         )
         out[slug] = asdict(constit)
 
