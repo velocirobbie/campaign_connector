@@ -63,8 +63,7 @@ h6 {
 .dropdown-content {
   display: block;
   background-color: #f6f6f6;
-  min-width: 400px;
-  max-width: fit-content;
+  max-width: 400px;
   overflow: auto;
   border: 2px solid #ddd;
   z-index: 1;
@@ -82,7 +81,7 @@ h6 {
   display: block;
 }
 
-.dropdown a:hover {background-color: #ddd;}
+.dropdown-content a:hover {background-color: #ddd;}
 
 .show {display: block;}
 
@@ -97,7 +96,7 @@ h6 {
   margin-top: 16px;
   margin-left: auto;
   margin-right: auto;
-  width: 400px;
+  max-width: 400px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   display: flex;
