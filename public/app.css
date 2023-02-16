@@ -177,3 +177,7 @@ details {
   background: #dc241f;;
   color: white;
 }
+
+a.red {
+  color: #dc241f;
+}
