@@ -150,3 +150,30 @@ p.result-sub {
   overflow: auto;
   text-align: center;
 }
+
+details summary { 
+  cursor: pointer;
+}
+
+summary {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+details {
+  background: #eee;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  margin: 1rem;
+}
+
+.equation {
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: center;
+}
+
+*::selection {
+  background: #dc241f;;
+  color: white;
+}

@@ -9,7 +9,40 @@
   <section style="max-width:-webkit-fill-available;text-align:left;margin:auto">
     <h1>Methodology</h1>
   </section>
-  <h4>Methodology summary and link to pdf</h4>
+
+  <details>
+    <summary>Method in 100 words</summary>
+      <p>
+Constituencies with similar types of people will probably be influenced by similar campaign strategies. We used census data and the change in vote percentage (swing) of each constituency to see which performed the best. If a constituency had a better swing compared to lots of similar areas, we rank it highly. When you search for a constituency we show you seats that have been ranked highly and are similar to the one you searched for. In theory, these are the best places to look for your campaign ideas!
+      </p>
+  </details>
+  <details>
+    <summary>Method in 300 words</summary>
+    <p>
+We want to work out which local campaigns were the best, and then share them with people who can benefit the most. We can’t just look at the swing in each seat, because the national Labour campaign will have performed better with some types of people than others, and the type of people in different seats varies a lot. So, we need to remove the effect of the national campaign, and see which local results stand out. We need to:
+  </p>
+  <ol>
+    <li>Come up with a measure for how similar constituencies are.</li>
+    <li>Determine a score for how well each constituency did</li>
+  </ol>
+  <p>To characterise a constituency we use data from the ONS Census. We use things like: density, ethnicity, home ownership, age, student population etc. Once you add a few features you get a good spread of constituencies and it doesn’t really matter which you pick. The distance between constituencies is then the difference between all these metrics added together. The similarity is the inverse of this distance.</p>
+
+  <p>We used swing from the 2019 to the 2017 election to score each constituency. We did try using polling information or more historical election data, but this ended up bringing in further quirks which confused the output.</p>
+
+  <p>Finally, to determine how well a constituency did, we compare it to every other constituency. We take the difference between the constituency’s swing and multiply it by their similarity. </p>
+
+  <p class='equation'>(SwingA - SwingB) x distance between A and B</p>
+
+  <p>For two constituencies A and B, if A and B are very similar and A had much higher swing to Labour than B, A would score highly and B would get a negative contribution. If A and B were not similar at all, then they wouldn’t have much affect on their overall score as the similarity would be close to zero. This is done for every combination and totalled up.</p>
+
+  <p>By adding up all these scores for each constituency, we see that some stand out by performing better than many similar constituencies. These are the ones that are recommended to you in the Campaign Connector. </p>
+</p>
+  </details>
+  <details>
+    <summary>Tell me everything</summary>
+    <p>For more gnarly details of the maths and the many other attempts made to get something out of this dataset check out <a href='/localcampaigns-report.docx'>this report</a>, which may be a bit out of date.</p>
+    <p>For the good stuff, and an up to date hyperparameters for the model check out the <a href='https://github.com/velocirobbie/campaign_connector'>github</a> for this site which also contains all the data and the model. A json output of the model can be found at this <a href='/analysis.json'>endpoint</a>.</p>
+  </details>
 </header>
 
 <%- include('footer.ejs') %>
