@@ -187,15 +187,19 @@ function print_window(message) {
   window.alert(message)
 }
 
-function get_twitter_link(twitter) {
+function get_twitter_link(twitter, name) {
   if (twitter != 'not found') {
     link = (
-      'Twitter:  <a href="https://mobile.twitter.com/' + twitter + 
+      'Twitter:  <a href="https://mobile.twitter.com/' + twitter +
       '" target="_blank" rel="noopener noreferrer">' +
       '<i class="fa fa-twitter"></i>' + twitter + '</a>'
     )
   } else {
-    link = 'Twitter: not found'
+    search_term = name.replaceAll(' ', '+') + '+CLP'
+    console.log(name, search_term);
+    link = '<a href="https://www.google.com/search?q=' + search_term + '"' +
+      '" target="_blank" rel="noopener noreferrer">' +
+      'Find their CLP'
   }
   return link
 }
@@ -208,7 +212,7 @@ function constit_details(slug) {
 
   title.innerHTML = name;
   let twitter = analysis[slug].twitter;
-  let twitter_link = get_twitter_link(twitter);
+  let twitter_link = get_twitter_link(twitter, name);
   
   let contact_block = document.getElementById("contact-info")
   let contact_links = document.getElementById("contact-links")
