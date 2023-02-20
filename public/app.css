@@ -151,8 +151,12 @@ p.result-sub {
   text-align: center;
 }
 
-details summary { 
+details summary {
   cursor: pointer;
+}
+
+details:hover {
+  box-shadow: 0 1px 2px #ddd;
 }
 
 summary {
@@ -162,9 +166,9 @@ summary {
 
 details {
   background: #eee;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   padding: 1rem 2rem;
-  margin: 1rem;
+  margin: 0.7rem;
 }
 
 .equation {

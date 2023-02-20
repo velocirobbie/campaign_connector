@@ -29,17 +29,27 @@ We want to work out which local campaigns were the best, and then share them wit
 
   <p>We used swing from the 2019 to the 2017 election to score each constituency. We did try using polling information or more historical election data, but this ended up bringing in further quirks which confused the output.</p>
 
-  <p>Finally, to determine how well a constituency did, we compare it to every other constituency. We take the difference between the constituency’s swing and multiply it by their similarity. </p>
+  <p>Finally, to determine how well a constituency did, we compare it to every other constituency. We take the difference between the constituency’s swing and divide it by the distance between them. </p>
 
-  <p class='equation'>(SwingA - SwingB) x distance between A and B</p>
+  <p class='equation'>(SwingA - SwingB) / distance between A and B</p>
 
   <p>For two constituencies A and B, if A and B are very similar and A had much higher swing to Labour than B, A would score highly and B would get a negative contribution. If A and B were not similar at all, then they wouldn’t have much affect on their overall score as the similarity would be close to zero. This is done for every combination and totalled up.</p>
 
   <p>By adding up all these scores for each constituency, we see that some stand out by performing better than many similar constituencies. These are the ones that are recommended to you in the Campaign Connector. </p>
 </p>
   </details>
+
   <details>
-    <summary>Tell me everything</summary>
+    <summary>Some caveats</summary>
+    <ul>
+      <li>Swing would be a really great measure of sucecess if there were only two parties. Because there are more options, the model can lead to some odd recommendations where the presence of another party is a bit arbitary. For example, the green party in Brighton which would otherwise probably be a labour seat. Sometimes a liberal democrat presence can be arbitary, because of historical reasons or tactical voting trends which can also skew results.</li>
+      <li>Exceptional circumstances can lead to some constituencies being recommended when really it was not a good campaign that lead to a large swing. For example, Bradford West has the highest swing to Labour in the 2019 election, but this is mainly due to recovering from bad press surrounding the previous election.</li>
+      <li>There are lot of small random factors that can influence a constituencies swing, so make sure to check out several of the recommendations to find campaign ideas.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Everything else</summary>
     <p>For more gnarly details of the maths and the many other attempts made to get something out of this dataset check out <a class='red' href='/localcampaigns-report.docx'>this report</a>, which may be a bit out of date.</p>
     <p>For the good stuff, and an up to date hyperparameters for the model check out the <a class='red' href='https://github.com/velocirobbie/campaign_connector'>github</a> for this site which also contains all the data and the model. A json output of the model can be found at this <a class='red' href='/analysis.json'>endpoint</a>.</p>
   </details>
