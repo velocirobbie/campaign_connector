@@ -20,6 +20,8 @@ DATA = 'data'
 TWITTER = 'CLP Twitter Handles.xlsx - Sheet1.csv'
 NO_TWITTER = 'not found'
 
+N_TO_SHOW = 10
+
 def get_election_results():
     return clp.read_in_election_results()
 
@@ -360,7 +362,7 @@ if __name__ == "__main__":
             swing=scores.loc[i, "uns"],
             model_result=model_result,
             message=get_message(model_result),
-            connections=list_relevant_connections(i, relevance_matrix, N=5),
+            connections=list_relevant_connections(i, relevance_matrix, N=N_TO_SHOW),
             election_data=election_df.loc[i].to_dict(),
             demographic_data=demographic_data.loc[i].to_dict(),
             twitter=handle,
