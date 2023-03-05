@@ -6,6 +6,12 @@
 <%- include('banner.ejs') %>
 
 <%- include('title.ejs') %>
+
+<div class='constit-nav'>
+  <a class='constit-nav-selected' id='constit-connector'>Connections</a>
+  <a class='constit-nav-go' id='constit-info'>Constituency info</a>
+</div>
+
 <div id='results'></div>
 
 <%- include('footer.ejs') %>
@@ -16,6 +22,7 @@
 <script src="/app.js"></script>
 <script>
   load_constit('<%= constit %>')
+  load_constit_links('<%= constit %>')
   set_search_value('<%= constit %>')
 </script>
 

@@ -95,7 +95,7 @@ function filterconstits() {
 
 function displayResultConstit(constit) {
   let link = document.createElement('a');
-  link.href = '/' + constit.slug;
+  link.href = '/' + constit.slug + '/info';
   link.setAttribute('style', 'text-decoration: none')
 
   let div = document.createElement('div');
@@ -135,6 +135,14 @@ function displayResultConstit(constit) {
 
   return link
 }
+
+function load_constit_links(slug) {
+  let connections_link = document.getElementById("constit-connector");
+  let info_link = document.getElementById("constit-info");
+  connections_link.href = '/' + slug + '/connections';
+  info_link.href = '/' + slug + '/info';
+}
+
 
 
 function load_constit(slug) {
@@ -190,14 +198,14 @@ function print_window(message) {
 function get_twitter_link(twitter, name) {
   if (twitter != 'not found') {
     link = (
-      'Twitter:  <a href="https://mobile.twitter.com/' + twitter +
+      'Twitter:  <a class="red" href="https://mobile.twitter.com/' + twitter +
       '" target="_blank" rel="noopener noreferrer">' +
       '<i class="fa fa-twitter"></i>' + twitter + '</a>'
     )
   } else {
     search_term = name.replaceAll(' ', '+') + '+CLP'
     console.log(name, search_term);
-    link = '<a href="https://www.google.com/search?q=' + search_term + '"' +
+    link = '<a class="red" href="https://www.google.com/search?q=' + search_term + '"' +
       '" target="_blank" rel="noopener noreferrer">' +
       'Find their CLP'
   }
@@ -210,7 +218,6 @@ function constit_details(slug) {
   let name = analysis[slug].name;
   let title = document.getElementById("constit-title")
 
-  title.innerHTML = name;
   let twitter = analysis[slug].twitter;
   let twitter_link = get_twitter_link(twitter, name);
   

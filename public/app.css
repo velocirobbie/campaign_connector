@@ -186,3 +186,30 @@ details {
 a.red {
   color: #dc241f;
 }
+
+.constit-nav {
+  display: grid;
+  grid-auto-flow: column;
+  width: 630px;
+  align-items: center;
+  margin: auto;
+  margin-top: 0;
+}
+
+.constit-nav > a {
+  align-self: center;
+  color: #888;
+  background: #fff;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  border-radius: 1em 1em 0 0;
+  border-top: none;
+  border: 1.5px solid #ddd;
+  text-decoration: none;
+}
+
+.constit-nav > .constit-nav-selected {
+  color: #444;
+  transform: scale(1.1);
+  transform-origin: bottom;
+}

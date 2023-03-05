@@ -5,23 +5,21 @@
 <body>
 <%- include('banner.ejs') %>
 
-<!-- Content -->
-<header class="App-header">
-  <section style="max-width:-webkit-fill-available;text-align:left;margin:auto">
-    <h2 id="constit-title"></h2>
-  </section>
-</header>
+<%- include('title.ejs') %>
+
+<div class='constit-nav'>
+  <a class='constit-nav-go' id='constit-connector'>Connections</a>
+  <a class='constit-nav-selected' id='constit-info'>Constituency info</a>
+</div>
+
+<div id="constit-title"></div>
 
 <div class="constit-data">
   <div class="block" id="contact-info"></div>
   <div class="block" id="election-bar"></div>
 </div>
 
-
-<div id='results'></div>
-
 <%- include('footer.ejs') %>
-
 
 <script src="/analysis.js"></script>
 <script src="/d3_bar.js"></script>
@@ -29,9 +27,10 @@
 
 <script src="/app.js"></script>
 <script>
-  load_constit('<%= constit %>')
+  load_constit_links('<%= constit %>')
   election_bar('<%= constit %>')
   constit_details('<%= constit %>')
+  set_search_value('<%= constit %>')
 </script>
 
 

@@ -36,7 +36,7 @@ server.get('/:constit/connections', (req, res) => {
   res.render('constit-rank.ejs', {constit: req.params.constit})
 });
 
-server.get('/:constit', (req, res) => {
+server.get('/:constit/info', (req, res) => {
   res.render('constit.ejs', {constit: req.params.constit})
 });
 
