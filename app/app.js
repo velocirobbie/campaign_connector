@@ -139,8 +139,19 @@ function displayResultConstit(constit) {
 function load_constit_links(slug) {
   let connections_link = document.getElementById("constit-connector");
   let info_link = document.getElementById("constit-info");
+  let title = document.getElementById("constit-title");
   connections_link.href = '/' + slug + '/connections';
   info_link.href = '/' + slug + '/info';
+  title.innerHTML = analysis[slug].name
+}
+
+
+function display_swing(slug) {
+  swing = (analysis[slug].swing*100).toFixed(1)
+  if (swing > 0) {
+    swing = '+' + swing
+  }
+  return swing + '%'
 }
 
 
@@ -149,7 +160,7 @@ function load_constit(slug) {
   let name = analysis[slug].name;
   let results = document.getElementById("results");
 
-  swing = (analysis[slug].swing*100).toFixed(1) + '%'
+  swing = display_swing(slug)
   let text1 = (
     "In the 2019 election, Labour vote share fell with an average swing of -7.9% across the UK."
   )
@@ -163,7 +174,7 @@ function load_constit(slug) {
     "For each constituency you can see the <b>swing</b> to or away " +
     "from Labour, and their <b>similarity</b> to " + name + " demographic make up. " +
     "Click on the constituencies to see their election results. " +
-    "You can also see how to get in touch with them to see how they did it!"
+    "You can also find out how to get in touch with them to see how they did it!"
   )
   let paras = [text1, text2, text3]
   for (i = 0; i < paras.length; i++) {
@@ -175,7 +186,7 @@ function load_constit(slug) {
   // results
   results.appendChild(displayResultConstit(analysis[slug]));
   election_pie(slug, 'result-pie-'+slug);
-  for (i = 0; i < analysis[slug].connections.length; i++) {
+  for (i = 0; i < analysis[slug].connections.length - 2; i++) {
     constit = analysis[slug].connections[i];
     results.appendChild(displayResultConstit(constit));
     pie_name = 'result-pie-' + constit.slug;
@@ -194,6 +205,25 @@ function set_search_value(slug) {
 function print_window(message) {
   window.alert(message)
 }
+
+
+
+
+function result_summary(slug) {
+  let name = analysis[slug].name;
+  let div = document.getElementById("constit-result-description")
+  let para = document.createElement('h6');
+
+  swing = display_swing(slug)
+
+  let text = (
+    "In the 2019 election,  " + name + " had a labour swing of " + swing + '. ' +
+    name + " " + analysis[slug].message
+  )
+  para.innerHTML = text
+  div.appendChild(para);
+}
+
 
 function get_twitter_link(twitter, name) {
   if (twitter != 'not found') {

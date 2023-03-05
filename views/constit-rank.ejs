@@ -5,14 +5,22 @@
 <body>
 <%- include('banner.ejs') %>
 
-<%- include('title.ejs') %>
+<h2 id='constit-title'></h2>
 
 <div class='constit-nav'>
-  <a class='constit-nav-selected' id='constit-connector'>Connections</a>
+  <a class='constit-nav-selected' id='constit-connector'>Find connections</a>
   <a class='constit-nav-go' id='constit-info'>Constituency info</a>
 </div>
 
 <div id='results'></div>
+
+<hr>
+
+<div id="constitDropdown" class="dropdown-content">
+  <input type="text" placeholder="Search for another constituency.." id="constitInput" onkeyup="filterconstits()">
+</div>
+
+
 
 <%- include('footer.ejs') %>
 
@@ -23,7 +31,6 @@
 <script>
   load_constit('<%= constit %>')
   load_constit_links('<%= constit %>')
-  set_search_value('<%= constit %>')
 </script>
 
 </body>
