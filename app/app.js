@@ -165,7 +165,7 @@ function load_constit(slug) {
     "In the 2019 election, Labour vote share fell with an average swing of -7.9% across the UK."
   )
   let text2 = (
-    name + " had a " + swing + " labour swing. " +
+    name + " had a " + swing + " Labour swing. " +
     name + " " + analysis[slug].message +
     " Below are some constituencies with similar demographic make up to " + name +
     " who also did better than average."
@@ -219,7 +219,7 @@ function result_summary(slug) {
   swing = display_swing(slug)
 
   let text = (
-    "In the 2019 election,  " + name + " had a labour swing of " + swing + '. ' +
+    "In the 2019 election,  " + name + " had a Labour swing of " + swing + '. ' +
     name + " " + analysis[slug].message
   )
   para.innerHTML = text
