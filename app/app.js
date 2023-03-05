@@ -186,6 +186,8 @@ function load_constit(slug) {
   // results
   results.appendChild(displayResultConstit(analysis[slug]));
   election_pie(slug, 'result-pie-'+slug);
+  let hr = document.createElement('hr');
+  results.appendChild(hr);
   for (i = 0; i < analysis[slug].connections.length - 2; i++) {
     constit = analysis[slug].connections[i];
     results.appendChild(displayResultConstit(constit));
