@@ -13,7 +13,9 @@
   <details>
     <summary>Method in 100 words</summary>
       <p>
-Constituencies with similar types of people will probably be influenced by similar campaign strategies. We used census data and the change in vote percentage (swing) of each constituency to see which performed the best. If a constituency had a better swing compared to lots of similar areas, we rank it highly. When you search for a constituency we show you seats that have been ranked highly and are similar to the one you searched for. In theory, these are the best places to look for your campaign ideas!
+Constituencies with similar types of people will probably be influenced by similar campaign strategies, and therefore the best places to look for your campaign strategies!
+      </p>
+      <p>We used census data and the change in vote percentage (swing) of each constituency to see which performed the best. If a constituency had a better swing compared to lots of similar constituencies, we rank it highly. When you search for a constituency, we show you other constituencies that have been ranked highly and have similar demographic census data to the one you searched for. In theory, these will be best places to learn about what strategies will work best in your constituency.
       </p>
   </details>
   <details>
@@ -23,11 +25,11 @@ We want to work out which local campaigns were the best, and then share them wit
   </p>
   <ol>
     <li>Come up with a measure for how similar constituencies are.</li>
-    <li>Determine a score for how well each constituency did</li>
+    <li>Determine a score for how well each constituency did.</li>
   </ol>
-  <p>To characterise a constituency we use data from the ONS Census. We use things like: density, ethnicity, home ownership, age, student population etc. Once you add a few features you get a good spread of constituencies and it doesn’t really matter which you pick. The distance between constituencies is then the difference between all these metrics added together. The similarity is the inverse of this distance.</p>
+  <p>To characterise a constituency we use data from the ONS Census. We use things like: density, ethnicity, home ownership, age, student population etc. Once you add a few features you get a good spread of constituencies and it doesn’t really matter which you pick. The 'distance' between constituencies is then the difference between all these metrics added together (using the Euclidean distance). The similarity is the inverse of this distance.</p>
 
-  <p>We used swing from the 2019 to the 2017 election to score each constituency. We did try using polling information or more historical election data, but this ended up bringing in further quirks which confused the output.</p>
+  <p>We used swing from the 2017 to the 2019 election to score each constituency. We did try using polling information or more historical election data, but this ended up bringing in further quirks which confused the output.</p>
 
   <p>Finally, to determine how well a constituency did, we compare it to every other constituency. We take the difference between the constituency’s swing and divide it by the distance between them. </p>
 
