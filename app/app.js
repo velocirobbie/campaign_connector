@@ -136,13 +136,9 @@ function displayResultConstit(constit) {
   return link
 }
 
-function load_constit_links(slug) {
-  let connections_link = document.getElementById("constit-connector");
-  let info_link = document.getElementById("constit-info");
+function load_constit_title(slug) {
   let title = document.getElementById("constit-title");
-  connections_link.href = '/' + slug + '/connections';
-  info_link.href = '/' + slug + '/info';
-  title.innerHTML = analysis[slug].name
+  title.innerHTML = analysis[slug].name;
 }
 
 
@@ -259,9 +255,9 @@ function constit_details(slug) {
   let twitter_link = get_twitter_link(twitter, name);
   
   let contact_block = document.getElementById("contact-info")
-  let contact_links = document.getElementById("contact-links")
   let contact_blurb = document.createElement('h4')
   let contact_info = document.createElement('h4')
+  let constit_connections = document.createElement('h4')
 
   contact_blurb.innerHTML = (
     "Get in touch with " + name + " CLP. Find out more about how they " +
@@ -270,8 +266,13 @@ function constit_details(slug) {
   contact_info.innerHTML = (
     twitter_link
   )
+  constit_connections.innerHTML = (
+    'See the constituency <a class="red" href="/' + slug + '/connections"> ' + 'connections</a> '+
+    'for this constituency.'
+  );
 
   contact_block.appendChild(contact_blurb)
   contact_block.appendChild(contact_info)
+  contact_block.appendChild(constit_connections);
 }
 

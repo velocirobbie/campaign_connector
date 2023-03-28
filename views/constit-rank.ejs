@@ -7,11 +7,6 @@
 
 <h2 id='constit-title'></h2>
 
-<div class='constit-nav'>
-  <a class='constit-nav-selected' id='constit-connector'>Find connections</a>
-  <a class='constit-nav-go' id='constit-info'>Constituency info</a>
-</div>
-
 <div id='results'></div>
 
 <hr>
@@ -29,8 +24,8 @@
 <script src="/analysis.js"></script>
 <script src="/app.js"></script>
 <script>
+  load_constit_title('<%= constit %>')
   load_constit('<%= constit %>')
-  load_constit_links('<%= constit %>')
 </script>
 
 </body>
