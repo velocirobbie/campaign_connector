@@ -38,6 +38,10 @@ h6 {
   text-align: left
 }
 
+#connections-title {
+  margin-top: 20px;
+}
+
 .dropbtn:hover, .dropbtn:focus {
   background-color: #3e8e41;
 }
