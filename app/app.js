@@ -172,11 +172,13 @@ function load_constit(slug) {
   )
   let text3 = (
     "For each constituency you can see the <b>swing</b> to or away " +
-    "from Labour, and their <b>similarity</b> to " + name + " demographic make up. " +
-    "Click on the constituencies to see their election results. " +
+    "from Labour, and the demographic <b>similarity</b> to " + name + " demographic."
+  )
+  let text4 = (
+    "<b>Click on the constituency cards below</b> to see their election results. " +
     "You can also find out how to get in touch with them to see how they did it!"
   )
-  let paras = [text1, text2, text3]
+  let paras = [text1, text2, text3, text4]
   for (i = 0; i < paras.length; i++) {
     let para = document.createElement('h6');
     para.innerHTML = paras[i]
@@ -184,10 +186,17 @@ function load_constit(slug) {
   }
 
   // results
+  let para1 = document.createElement('h6');
+  para1.innerHTML = "Searched for constituency:";
+  results.appendChild(para1);
   results.appendChild(displayResultConstit(analysis[slug]));
   election_pie(slug, 'result-pie-'+slug);
   let hr = document.createElement('hr');
   results.appendChild(hr);
+  let para2 = document.createElement('h6');
+  para2.innerHTML = "Connections:";
+  results.appendChild(para2);
+
   for (i = 0; i < analysis[slug].connections.length - 2; i++) {
     constit = analysis[slug].connections[i];
     results.appendChild(displayResultConstit(constit));
