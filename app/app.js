@@ -171,8 +171,8 @@ function load_constit(slug) {
     "from Labour, and the demographic <b>similarity</b> to " + name + " demographic."
   )
   let text4 = (
-    "<b>Click on the constituencies below</b> to see their election results. " +
-    "You can also find out how to get in touch with them to see how they did it!"
+    "<b>Click on the constituencies below</b> to see their election results, " +
+    "find out how to get in touch with them to see how they did it!"
   )
   let paras = [text1, text2, text3, text4]
   for (i = 0; i < paras.length; i++) {
